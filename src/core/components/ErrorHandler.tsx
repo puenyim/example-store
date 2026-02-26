@@ -1,5 +1,5 @@
 import { Component, type ReactNode, type ErrorInfo } from 'react';
-import './Error.css';
+import './ErrorHandler.css';
 
 interface Props {
     children: ReactNode;
