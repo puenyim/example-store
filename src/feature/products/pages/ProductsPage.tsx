@@ -1,5 +1,8 @@
 import { useProducts } from '../hooks/useProducts';
 import ProductList from '../components/ProductList';
+import Spinner from '@/core/components/Spinner';
+import ErrorMessage from '@/core/components/ErrorMessage';
+import useProductStore from '../store/productStore';
 import './ProductsPage.css';
 
 const ProductsPage = () => {
@@ -12,12 +15,20 @@ const ProductsPage = () => {
         handleCategoryChange,
     } = useProducts();
 
+    const fetchProducts = useProductStore((s) => s.fetchProducts);
+    const fetchCategories = useProductStore((s) => s.fetchCategories);
+
+    const handleRetry = () => {
+        fetchProducts();
+        fetchCategories();
+    };
+
     return (
         <div className="products-page">
             <div className="products-page__header">
                 <h1 className="products-page__title">All Products</h1>
                 <p className="products-page__subtitle">
-                    {products.length} items available
+                    {!isLoading && !error ? `${products.length} items available` : '\u00a0'}
                 </p>
             </div>
 
@@ -41,17 +52,16 @@ const ProductsPage = () => {
             </div>
 
             {/* States */}
-            {isLoading && (
-                <div className="products-page__loading">
-                    <div className="spinner" />
-                    <span>Loading products...</span>
-                </div>
+            {isLoading && <Spinner fullPage label="Loading products..." />}
+
+            {!isLoading && error && (
+                <ErrorMessage
+                    message={error}
+                    onRetry={handleRetry}
+                    fullPage
+                />
             )}
-            {error && (
-                <div className="products-page__error">
-                    ⚠️ {error}
-                </div>
-            )}
+
             {!isLoading && !error && <ProductList products={products} />}
         </div>
     );

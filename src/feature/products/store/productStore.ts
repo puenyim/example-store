@@ -1,12 +1,20 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import type { Product, Category } from '@/core/types/product.types';
+import { isApiError } from '@/core/api/interceptors';
 import {
     getProducts,
     getProductById,
     getCategories,
     getProductsByCategory,
 } from '../services/productService';
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+const extractError = (err: unknown, fallback: string): string =>
+    isApiError(err) ? err.message : err instanceof Error ? err.message : fallback;
+
+// ── State interface ───────────────────────────────────────────────────────────
 
 interface ProductState {
     // State
@@ -25,6 +33,8 @@ interface ProductState {
     setSelectedCategory: (category: string | null) => void;
     clearSelectedProduct: () => void;
 }
+
+// ── Store ─────────────────────────────────────────────────────────────────────
 
 const useProductStore = create<ProductState>()(
     devtools(
@@ -45,7 +55,7 @@ const useProductStore = create<ProductState>()(
                     set({ products, isLoading: false });
                 } catch (err) {
                     set({
-                        error: err instanceof Error ? err.message : 'Failed to fetch products',
+                        error: extractError(err, 'Failed to fetch products.'),
                         isLoading: false,
                     });
                 }
@@ -58,7 +68,7 @@ const useProductStore = create<ProductState>()(
                     set({ selectedProduct: product, isLoading: false });
                 } catch (err) {
                     set({
-                        error: err instanceof Error ? err.message : 'Failed to fetch product',
+                        error: extractError(err, 'Failed to fetch product.'),
                         isLoading: false,
                     });
                 }
@@ -70,8 +80,7 @@ const useProductStore = create<ProductState>()(
                     set({ categories });
                 } catch (err) {
                     set({
-                        error:
-                            err instanceof Error ? err.message : 'Failed to fetch categories',
+                        error: extractError(err, 'Failed to fetch categories.'),
                     });
                 }
             },
@@ -83,10 +92,7 @@ const useProductStore = create<ProductState>()(
                     set({ products, selectedCategory: category, isLoading: false });
                 } catch (err) {
                     set({
-                        error:
-                            err instanceof Error
-                                ? err.message
-                                : 'Failed to fetch products by category',
+                        error: extractError(err, 'Failed to fetch products by category.'),
                         isLoading: false,
                     });
                 }

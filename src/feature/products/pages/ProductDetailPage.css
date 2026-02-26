@@ -134,30 +134,3 @@
 .product-detail__cart-btn--added:hover {
     background: #16a34a;
 }
-
-/* Reuse spinner from ProductsPage */
-.detail-loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    padding: 120px 0;
-    color: var(--text-muted, #94a3b8);
-    font-size: 16px;
-}
-
-.detail-error {
-    text-align: center;
-    padding: 80px 0;
-    color: #ef4444;
-}
-
-.detail-error button {
-    margin-top: 16px;
-    background: none;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: var(--text-primary, #e2e8f0);
-    padding: 10px 24px;
-    border-radius: 8px;
-    cursor: pointer;
-}

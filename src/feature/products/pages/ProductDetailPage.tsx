@@ -2,6 +2,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useProductDetail } from '../hooks/useProductDetail';
 import { formatPrice } from '@/core/utils/formatPrice';
 import { useCart } from '@/feature/cart/hooks/useCart';
+import Spinner from '@/core/components/Spinner';
+import ErrorMessage from '@/core/components/ErrorMessage';
+import useProductStore from '../store/productStore';
 import './ProductDetailPage.css';
 
 const ProductDetailPage = () => {
@@ -9,21 +12,23 @@ const ProductDetailPage = () => {
     const navigate = useNavigate();
     const { product, isLoading, error } = useProductDetail(Number(id));
     const { addItem, isInCart } = useCart();
+    const fetchProductById = useProductStore((s) => s.fetchProductById);
 
     if (isLoading) {
-        return (
-            <div className="detail-loading">
-                <div className="spinner" />
-                <span>Loading product...</span>
-            </div>
-        );
+        return <Spinner fullPage label="Loading product..." />;
     }
 
     if (error || !product) {
         return (
-            <div className="detail-error">
-                <p>⚠️ {error ?? 'Product not found.'}</p>
-                <button onClick={() => navigate('/')}>← Back to Products</button>
+            <div className="product-detail">
+                <button className="product-detail__back" onClick={() => navigate(-1)}>
+                    ← Back
+                </button>
+                <ErrorMessage
+                    message={error ?? 'Product not found.'}
+                    onRetry={() => fetchProductById(Number(id))}
+                    fullPage
+                />
             </div>
         );
     }
