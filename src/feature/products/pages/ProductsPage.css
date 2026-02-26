@@ -1,0 +1,91 @@
+.products-page {
+    padding: 32px 0;
+}
+
+.products-page__header {
+    margin-bottom: 24px;
+}
+
+.products-page__title {
+    font-size: 32px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #e2e8f0, #7c6aff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 4px;
+}
+
+.products-page__subtitle {
+    color: var(--text-muted, #94a3b8);
+    font-size: 14px;
+    margin: 0;
+}
+
+.products-page__filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+
+.filter-btn {
+    padding: 8px 20px;
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: transparent;
+    color: var(--text-muted, #94a3b8);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: capitalize;
+}
+
+.filter-btn:hover {
+    background: rgba(124, 106, 255, 0.15);
+    border-color: rgba(124, 106, 255, 0.4);
+    color: var(--text-primary, #e2e8f0);
+}
+
+.filter-btn--active {
+    background: var(--accent, #7c6aff);
+    border-color: var(--accent, #7c6aff);
+    color: #fff;
+    font-weight: 600;
+}
+
+.products-page__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 80px 0;
+    color: var(--text-muted, #94a3b8);
+    font-size: 16px;
+}
+
+.spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid rgba(124, 106, 255, 0.2);
+    border-top-color: var(--accent, #7c6aff);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.products-page__error {
+    text-align: center;
+    padding: 60px;
+    color: #ef4444;
+    font-size: 16px;
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: 12px;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}

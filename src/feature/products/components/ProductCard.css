@@ -1,0 +1,117 @@
+.product-card {
+  background: var(--bg-card, #1e1e2e);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+.product-card__image-wrapper {
+  background: #ffffff;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+}
+
+.product-card__image {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.product-card:hover .product-card__image {
+  transform: scale(1.05);
+}
+
+.product-card__body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.product-card__category {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--accent, #7c6aff);
+}
+
+.product-card__title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary, #e2e8f0);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+}
+
+.product-card__rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.product-card__stars {
+  color: #f59e0b;
+}
+
+.product-card__rating-count {
+  color: var(--text-muted, #94a3b8);
+}
+
+.product-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.product-card__price {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary, #e2e8f0);
+}
+
+.product-card__btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent, #7c6aff);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.product-card__btn:hover {
+  background: #6355e0;
+  transform: scale(1.02);
+}
+
+.product-card__btn--in-cart {
+  background: #22c55e;
+}
+
+.product-card__btn--in-cart:hover {
+  background: #16a34a;
+}
