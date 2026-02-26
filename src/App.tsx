@@ -1,7 +1,7 @@
 import AppProviders from './app/providers/AppProviders';
 import AppRouter from './app/router/AppRouter';
 import Navbar from './app/layout/Navbar';
-import ErrorBoundary from './core/components/Error';
+import ErrorBoundary from './core/components/ErrorHandler';
 import './App.css';
 
 function App() {
